@@ -34,6 +34,30 @@ Built using **Python**, **CustomTkinter**, and **yt-dlp**.
 Download the latest standalone executable (`app.exe`) directly from the **[Releases](../../releases)** tab and run it with a double-click.
 
 ### Option 2: Run from Source Code
+Create and activate a virtual environment (recommended):
+
+Bash
+python -m venv venv
+# On Windows:
+venv\Scripts\activate
+Install dependencies:
+
+Bash
+pip install -r requirements.txt
+Launch the app:
+
+Bash
+python app.py
+🔨 Packaging as Standalone (.exe)
+To bundle the application into a single executable binary:
+
+Bash
+pip install pyinstaller
+pyinstaller --noconsole --onefile --collect-all customtkinter --collect-all imageio_ffmpeg app.py
+The output executable will be generated inside the dist/ directory.
+
+📄 License
+This project is licensed under the MIT License - feel free to modify and distribute.
 
 1. **Clone the repository:**
    ```bash
