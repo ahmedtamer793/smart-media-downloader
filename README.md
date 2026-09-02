@@ -34,6 +34,11 @@ Built using **Python**, **CustomTkinter**, and **yt-dlp**.
 Download the latest standalone executable (`app.exe`) directly from the **[Releases](../../releases)** tab and run it with a double-click.
 
 ### Option 2: Run from Source Code
+
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/ahmedtamer793/smart-media-downloader.git](https://github.com/ahmedtamer793/smart-media-downloader.git)
+   cd smart-media-downloader
 Create and activate a virtual environment (recommended):
 
 Bash
@@ -58,8 +63,3 @@ The output executable will be generated inside the dist/ directory.
 
 📄 License
 This project is licensed under the MIT License - feel free to modify and distribute.
-
-1. **Clone the repository:**
-   ```bash
-   git clone [https://github.com/ahmedtamer793/smart-media-downloader.git](https://github.com/ahmedtamer793/smart-media-downloader.git)
-   cd smart-media-downloader
