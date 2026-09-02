@@ -1,0 +1,15 @@
+# Virtual Environment & Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+
+# PyInstaller build outputs
+build/
+dist/
+*.spec
+
+# VS Code / IDE settings
+.vscode/
+.idea/
