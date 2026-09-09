@@ -190,8 +190,8 @@ class DownloaderApp(ctk.CTk):
         except Exception:
             return None
 
+    #Remove parameters to avoid download all playlist
     def clean_url(self, url):
-        # إزالة بارامترات قوائم التشغيل لمنع تحميل القائمة كاملة
         if "youtube.com/watch" in url:
             url = re.sub(r'&list=[^&]+', '', url)
             url = re.sub(r'&index=[^&]+', '', url)
@@ -235,15 +235,13 @@ class DownloaderApp(ctk.CTk):
 
     def _fetch_info_thread(self, url):
         try:
-            # 1. حالة Spotify
+            #Spotify
             if self.is_spotify_url(url):
                 track_info = self.get_spotify_track_info(url)
                 title = track_info if track_info else "Spotify Track"
                 extractor = "Spotify"
-                # تفعيل الصوت تلقائياً لسبوتيفاي
                 self.media_type_var.set("audio")
 
-            # 2. حالة YouTube السريعة (oEmbed)
             elif self.is_youtube_url(url):
                 try:
                     oembed_url = f"https://www.youtube.com/oembed?url={url}&format=json"
@@ -256,7 +254,6 @@ class DownloaderApp(ctk.CTk):
                     title = "YouTube Video"
                     extractor = "YouTube"
 
-            # 3. باقي المنصات ومواقع الأفلام
             else:
                 ydl_opts = {'quiet': True, 'skip_download': True, 'no_warnings': True}
                 with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -330,7 +327,6 @@ class DownloaderApp(ctk.CTk):
 
         outtmpl = os.path.join(self.download_path, '%(title)s.%(ext)s')
 
-        # لو الرابط سبوتيفاي يتم تحويل التارجت لبحث دقيق عن الصوت
         if self.is_spotify_url(url):
             track_info = self.get_spotify_track_info(url)
             search_query = track_info if track_info else "audio track"
@@ -341,7 +337,7 @@ class DownloaderApp(ctk.CTk):
 
         ydl_opts = {
             'outtmpl': outtmpl,
-            'noplaylist': True,  # إيقاف تحميل القوائم وتنزيل تراك واحد فقط
+            'noplaylist': True,  
             'windowsfilenames': True,
             'progress_hooks': [self.progress_hook],
             'ffmpeg_location': self.ffmpeg_path,
@@ -355,7 +351,6 @@ class DownloaderApp(ctk.CTk):
             if match:
                 bitrate = match.group(1)
 
-            # سحب مسار الصوت المباشر بدون تقطيع لتحويله فوراً لـ MP3
             ydl_opts.update({
                 'format': 'bestaudio[ext=m4a]/bestaudio/best',
                 'postprocessors': [{
