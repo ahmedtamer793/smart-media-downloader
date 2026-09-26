@@ -342,7 +342,14 @@ class DownloaderApp(ctk.CTk):
             'progress_hooks': [self.progress_hook],
             'ffmpeg_location': self.ffmpeg_path,
             'quiet': True,
-            'no_warnings': True
+            'no_warnings': True,
+            'no_color': True,
+            # استخدام عملاء الهواتف لتفادي حجب فيديوهات الأطفال ومنع أخطاء منع التضمين
+            'extractor_args': {
+                'youtube': {
+                    'player_client': ['ios', 'android', 'mweb']
+                }
+            }
         }
 
         if m_type == "audio":
@@ -386,7 +393,7 @@ class DownloaderApp(ctk.CTk):
             messagebox.showinfo("Success", f"Download finished successfully!\nSaved to:\n{self.download_path}")
         except Exception as e:
             self.status_label.configure(text="Download failed", text_color="red")
-            messagebox.showerror("Download Error", f"An error occurred while downloading:\n{str(e)}")
+            messagebox.showerror("Download Error", f"An error occurred while downloading:\n{self.clean_text(str(e))}")
         finally:
             self.download_btn.configure(state="normal")
 
